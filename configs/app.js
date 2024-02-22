@@ -4,6 +4,7 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import { config } from 'dotenv'
 import userRoutes from '../src/users/user.routes.js'
+import categorieRoutes from '../src/categories/categories.routes.js'
 
 const app = express()
 config()
@@ -16,6 +17,7 @@ app.use(helmet())
 app.use(morgan('dev'))
 
 app.use('/usuarios', userRoutes)
+app.use('/categorias', categorieRoutes)
 
 export const initServer = ()=>{
     app.listen(port)
