@@ -1,0 +1,184 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Admin",
+    "dateExported": "2024-02-23T06:04:17.045Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "232261e7-f955-4f7d-b4e4-618c2f4e60d5",
+            "name": "Usuarios",
+            "containerId": "",
+            "created": "2024-02-23T02:40:10.710Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "58ea77bb-3394-43e1-afef-b02277a1a351",
+            "name": "Categorias",
+            "containerId": "",
+            "created": "2024-02-23T02:40:25.542Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "3c1c011d-9f96-4a7f-a7e8-d0305c5ca399",
+            "colId": "d583021f-ad60-43c5-a7eb-eb5927eddf93",
+            "containerId": "232261e7-f955-4f7d-b4e4-618c2f4e60d5",
+            "name": "RegisterAdmin",
+            "url": "usuarios/registerAdmin",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-02-23T04:26:39.348Z",
+            "modified": "2024-02-23T05:17:54.701Z",
+            "headers": [
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWQ4MGRjOGJjOWE2ODllZDY5MzBjMjMiLCJ1c2VybmFtZSI6InJwYXJlZGVzIiwibmFtZSI6IlJ1YsOpbiIsInJvbGUiOiJDTElFTlQiLCJpYXQiOjE3MDg2NjU0NjYsImV4cCI6MTcwODY3MjY2Nn0.h2qaHu47UdxMMAXFyMbp843d3y5ZNLDr0mD2N6wQw7I"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Josue"
+                    },
+                    {
+                        "name": "surname",
+                        "value": "Noj"
+                    },
+                    {
+                        "name": "username",
+                        "value": "jnoj"
+                    },
+                    {
+                        "name": "password",
+                        "value": "12345678"
+                    },
+                    {
+                        "name": "phone",
+                        "value": "12345678"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "19dec862-8472-45e8-992f-309926abc51d",
+            "colId": "d583021f-ad60-43c5-a7eb-eb5927eddf93",
+            "containerId": "232261e7-f955-4f7d-b4e4-618c2f4e60d5",
+            "name": "CambiarRol",
+            "url": "usuarios/changeRole/65d82a72457ae8818005aae9",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-02-23T05:18:46.749Z",
+            "modified": "2024-02-23T05:20:25.210Z",
+            "headers": [
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWQ4MWQ1NTljNTYyNGQxMzY2ZjdlNjMiLCJ1c2VybmFtZSI6InJwYXJlZGVzMSIsIm5hbWUiOiJSdWLDqW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MDg2NjU2MTQsImV4cCI6MTcwODY3MjgxNH0.91k7lpAlb5C6LCkjSvF5ok7x3fFxrmqxLSAQV1HJBto"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "9e84c427-8f98-4b5d-9968-99d4fd41aed4",
+            "colId": "d583021f-ad60-43c5-a7eb-eb5927eddf93",
+            "containerId": "58ea77bb-3394-43e1-afef-b02277a1a351",
+            "name": "NewCategorie",
+            "url": "categorias/newCategorie",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-02-23T06:01:06.331Z",
+            "modified": "2024-02-23T06:01:49.271Z",
+            "headers": [
+                {
+                    "name": "token",
+                    "value": ""
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": ""
+                    },
+                    {
+                        "name": "description",
+                        "value": ""
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "863fb5a6-e2a9-4155-a0fc-db98fac4adbb",
+            "colId": "d583021f-ad60-43c5-a7eb-eb5927eddf93",
+            "containerId": "58ea77bb-3394-43e1-afef-b02277a1a351",
+            "name": "UpdateCategorie",
+            "url": "categorias/updateCategorie/",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2024-02-23T06:02:19.159Z",
+            "modified": "2024-02-23T06:02:41.488Z",
+            "headers": [
+                {
+                    "name": "token",
+                    "value": ""
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": ""
+                    },
+                    {
+                        "name": "description",
+                        "value": ""
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "fde599aa-ac0e-4d09-b40d-f610836af991",
+            "colId": "d583021f-ad60-43c5-a7eb-eb5927eddf93",
+            "containerId": "58ea77bb-3394-43e1-afef-b02277a1a351",
+            "name": "DeleteCategorie",
+            "url": "categorias/deleteCategorie/",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2024-02-23T06:02:55.397Z",
+            "modified": "2024-02-23T06:03:17.262Z",
+            "headers": [
+                {
+                    "name": "token",
+                    "value": ""
+                }
+            ],
+            "params": [],
+            "tests": []
+        }
+    ],
+    "settings": {
+        "headers": [
+            {
+                "name": "token",
+                "value": ""
+            }
+        ],
+        "options": {
+            "baseUrl": "localhost:2880/"
+        }
+    }
+}

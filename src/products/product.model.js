@@ -15,6 +15,16 @@ const productSchema = Schema({
         type: Number,
         required: true
     },
+    existences: {
+        type: Number,
+        required: true,
+        default: 1
+    },
+    sales: {
+        type: Number,
+        required: true,
+        default: 0
+    },
     categorie: {
         type: Schema.ObjectId,
         ref: 'categories',

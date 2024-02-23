@@ -1,0 +1,157 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Publicas",
+    "dateExported": "2024-02-23T06:04:24.693Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "df19e6eb-f250-428f-8b52-18990ee10921",
+            "name": "Usuarios",
+            "containerId": "",
+            "created": "2024-02-23T03:02:38.756Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "6c74969a-d57e-4e5c-975e-e1e24838c421",
+            "name": "Categorias",
+            "containerId": "",
+            "created": "2024-02-23T03:02:45.642Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "9887adf4-d2b7-4eeb-a06a-81a527edc73b",
+            "colId": "1a844eb7-7d0b-4bc1-ac14-9c8f77a0e4fb",
+            "containerId": "df19e6eb-f250-428f-8b52-18990ee10921",
+            "name": "Login",
+            "url": "usuarios/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-02-23T03:03:56.423Z",
+            "modified": "2024-02-23T05:20:14.708Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "username",
+                        "value": "rparedes1"
+                    },
+                    {
+                        "name": "password",
+                        "value": "12345678"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "8d2563f2-e8eb-4f57-b84f-5e7d73354185",
+            "colId": "1a844eb7-7d0b-4bc1-ac14-9c8f77a0e4fb",
+            "containerId": "df19e6eb-f250-428f-8b52-18990ee10921",
+            "name": "Register",
+            "url": "usuarios/registerClient",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-02-23T03:05:35.661Z",
+            "modified": "2024-02-23T03:14:59.622Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Rubén"
+                    },
+                    {
+                        "name": "surname",
+                        "value": "Paredes"
+                    },
+                    {
+                        "name": "username",
+                        "value": "rparedes"
+                    },
+                    {
+                        "name": "password",
+                        "value": "12345678"
+                    },
+                    {
+                        "name": "phone",
+                        "value": "12345678"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "40307687-ca8b-4804-a8b8-2cc2b66e0c0f",
+            "colId": "1a844eb7-7d0b-4bc1-ac14-9c8f77a0e4fb",
+            "containerId": "df19e6eb-f250-428f-8b52-18990ee10921",
+            "name": "UpdateUser",
+            "url": "usuarios/updateUser/",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-02-23T05:57:46.867Z",
+            "modified": "2024-02-23T05:58:57.066Z",
+            "headers": [
+                {
+                    "name": "token",
+                    "value": ""
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": ""
+                    },
+                    {
+                        "name": "surname",
+                        "value": ""
+                    },
+                    {
+                        "name": "username",
+                        "value": ""
+                    },
+                    {
+                        "name": "phone",
+                        "value": ""
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "c9199855-b487-4df9-808b-553e6f22d4d4",
+            "colId": "1a844eb7-7d0b-4bc1-ac14-9c8f77a0e4fb",
+            "containerId": "df19e6eb-f250-428f-8b52-18990ee10921",
+            "name": "DeleteUser",
+            "url": "usuarios/deleteUser/",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2024-02-23T05:59:39.643Z",
+            "modified": "2024-02-23T05:59:56.416Z",
+            "headers": [
+                {
+                    "name": "token",
+                    "value": ""
+                }
+            ],
+            "params": [],
+            "tests": []
+        }
+    ],
+    "settings": {
+        "options": {
+            "baseUrl": "localhost:2880/"
+        }
+    }
+}
