@@ -17,13 +17,15 @@ const productSchema = Schema({
     },
     existences: {
         type: Number,
-        required: true,
         default: 1
     },
     sales: {
         type: Number,
-        required: true,
         default: 0
+    },
+    state: {
+        type: Boolean,
+        default: true
     },
     categorie: {
         type: Schema.ObjectId,

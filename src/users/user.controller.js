@@ -34,8 +34,15 @@ export const registerAdmin = async(req, res)=>{
 
 export const login = async(req, res)=>{
     try{
-        let { username, password } = req.body
-        let user = await User.findOne({ username })
+        let { username, password, email } = req.body
+        let user = await User.findOne({
+            $or: [{
+                username: username
+            },
+            {
+                email: email
+            }]
+        })
         if(user && await checkPassword(password, user.password)){
             let loggedUser = {
                 uid: user._id,
@@ -110,5 +117,28 @@ export const changeRole = async(req, res)=>{
     }catch(err){
         console.error(err)
         return res.status(500).send({message: 'Error changing role'})
+    }
+}
+
+export const userAdminDefault = async()=>{
+    try{
+        const data = {
+            name: 'Rubén',
+            surname: 'Paredes',
+            email: 'rparedes@kinal.edu.gt',
+            username: 'rparedes1',
+            password: await encrypt('12345678'),
+            phone: 12345678,
+            role: 'ADMIN'
+        }
+        let defualtCreated = await User.findOne({username: data.username})
+        if(!defualtCreated){
+            let user = new User(data)
+            await user.save()
+        }
+        console.log('Usuario default creado con anterioridad')
+    }catch(err){
+        console.error(err)
+        console.log('Error creando al usuario Admin por defecto')
     }
 }
