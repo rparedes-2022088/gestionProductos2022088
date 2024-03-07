@@ -83,3 +83,40 @@ export const deleteProduct = async(req, res)=>{
         console.error(err)
     }
 }
+
+export const searchProductByName = async(req, res)=>{
+    try{
+        let data = req.body
+        let foundedProduct = await Product.findOne({name: data.name, state: true})
+        if(!foundedProduct) return res.status(404).send({message: 'Product not found'})
+        return res.send({message: `Product ${foundedProduct.name}, price ${foundedProduct.price}, existences ${foundedProduct.existences}`})
+    }catch(err){
+        console.error(err)
+        return res.status(500).send({message: 'Error searching product'})
+    }
+}
+
+export const bestSellersProducts = async(req, res)=>{
+    try{
+        let products = await Product.find().sort({sales: -1})
+        if(!products) return res.status(404).send({message: 'There are not products'})
+        return res.send({message: products})
+    }catch(err){
+        console.error(err)
+        return res.status(500).send({message: 'Error viewing best sellers'})
+    }
+} 
+
+export const viewByCategorie = async(req,res)=>{
+    try {
+        let { id } = req.params
+        let product = await Product.find({categorie: id}, {state: true})
+        if(!product || product.state == false) return res.status(404).send({message: 'Products not found'})
+        let foundedProduct = await Product.find({_id: product._id}).populate('categorie',['categorie','description'])
+        return res.send({message:'Product',foundedProduct})
+     } catch (err) {
+        console.error(err)
+        return res.status(500).send({message:'Error searching products by categorie'})
+        
+    }
+}
