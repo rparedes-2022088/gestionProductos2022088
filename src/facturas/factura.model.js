@@ -8,7 +8,8 @@ const facturaSchema = Schema({
         ref: 'user'
     },
     nit: {
-        type: String
+        type: String,
+        default: 'CF'
     },
     fecha: {
         type: Date,

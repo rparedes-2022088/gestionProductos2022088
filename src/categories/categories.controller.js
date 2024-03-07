@@ -5,7 +5,7 @@ import Product from '../products/product.model.js'
 
 export const newCategorie = async(req, res)=>{
     try{
-        let data = req.data
+        let data = req.body
         let categorie = new Categorie(data)
         await categorie.save()
         return res.send({message: 'Categorie added succesfully'})

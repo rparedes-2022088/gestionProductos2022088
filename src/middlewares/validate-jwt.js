@@ -20,7 +20,7 @@ export const validateJwt = async(req, res, next)=>{
 export const isClient = async(req, res, next)=>{
     try{
         let { role, username } = req.user
-        if(!role || role !== 'CLIENT') res.status(403).send({message: `You dont have access ${username}`})
+        if(!role || role !== 'CLIENT') res.status(401).send({message: `You dont have access ${username}`})
         next()
     }catch(err){
         console.error(err)
@@ -31,7 +31,7 @@ export const isClient = async(req, res, next)=>{
 export const isAdmin = async(req, res, next)=>{
     try{
         let { role, username } = req.user
-        if(!role || role !== 'ADMIN') res.status(403).send({message: `You dont have access ${username}`})
+        if(!role || role !== 'ADMIN') res.status(401).send({message: `You dont have access ${username}`})
         next()
     }catch(err){
         console.error(err)

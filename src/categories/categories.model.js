@@ -5,7 +5,8 @@ import { Schema, model } from 'mongoose'
 const categoriesSchema = Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     description: {
         type: String,

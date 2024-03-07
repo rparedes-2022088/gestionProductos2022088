@@ -10,9 +10,10 @@ export const newSale = async(req, res)=>{
         let data = req.body
         data.user = req.user._id
         let productos = []
-        let total
+        let total = 0
 
         let foundedCarts = await Cart.find({user: req.user._id, state: true})
+        if(!foundedCarts) return res.send({message: 'El usuario no ha agregado nada aun al carrito'})
         for(const cart of foundedCarts){
             let productStock = await Product.findOne({_id: cart.product, state: true})
             if(productStock.existences < cart.amount) return res.send({message: 'There is less stock than desired'})
@@ -20,8 +21,8 @@ export const newSale = async(req, res)=>{
             let stock = productStock.existences - cart.amount
             let sale = productStock.sales + cart.amount
             let stockChange = await Product.findOneAndUpdate({_id: cart.product},{existences: stock, sales: sale})
-            productos.push(productStock._id)
-            total = total + (productStock.price * cart.amount)
+            productos.push(cart.product)
+            total += +cart.subtotal
         }
         let udpatedCarts = await Cart.updateMany({user: req.user._id, state: true}, {$set: {state: false}})
         data.products = productos
@@ -37,7 +38,7 @@ export const newSale = async(req, res)=>{
 
 export const viewMyFacturas = async(req, res)=>{
     try{
-        let { id } = req.user._id
+        let id = req.user._id
         let facturas = await Factura.find({user: id}).populate({
             path: 'cart.products',
             populate: {

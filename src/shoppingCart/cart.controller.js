@@ -55,9 +55,13 @@ export const editCart = async(req, res)=>{
 export const deleteProductCart = async(req, res)=>{
     try{
         let { id } = req.params
-        let foundedCart = await Cart.findOneAndDelete({_id: id, state: true})
-        if(!foundedCart) return res.status(404).send({message: 'Cart not exists, not deleted'})
-        return res.send({message: 'Product deleted from the cart', foundedCart})
+        let cartUser = await Cart.findOne({_id_: id})
+        if(cartUser.user == req.user._id){
+            let foundedCart = await Cart.findOneAndDelete({_id: id, state: true})
+            if(!foundedCart) return res.status(404).send({message: 'Cart not exists, not deleted'})
+            return res.send({message: 'Product deleted from the cart', foundedCart})
+        }
+        return res.status(501).send({message: 'Cannot delete product of cart of other user'})
     }catch(err){
         console.error(err)
         return res.status(500).send({message: 'Error deleting product of the cart'})

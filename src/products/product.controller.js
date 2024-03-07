@@ -59,9 +59,9 @@ export const updateProduct = async(req, res)=>{
 
 export const soldOutProducts = async(req, res)=>{
     try{
-        let soldOut = find({existences: 0, state: true})
+        let soldOut = Product.find({existences: 0, state: true})
         if(!soldOut) return res.send({message: 'There are not products sold out'})
-        return res.send({soldOut})
+        return res.send({message: soldOut})
     }catch(err){
         console.error(err)
         return res.status(500).send({message: 'Error viewing sold out products'})
@@ -74,10 +74,8 @@ export const deleteProduct = async(req, res)=>{
         let estado = {
             state: false
         }
-        let deletedProduct = await Product.findOneAndUpdate({_id: id}, estado, {new: true})
+        let deletedProduct = await Product.findOneAndUpdate({_id: id, state: true}, estado, {new: true})
         if(!deletedProduct) return res.status(404).send({message: 'Product not founded and not deleted'})
-        let productState = await Product.findOne({_id: id, state: false})
-        if(productState) return res.send({message: 'Product deleted previously'})
         return res.send({message: `Product ${deletedProduct.name} deleted`})
     }catch(err){
         console.error(err)
@@ -98,7 +96,7 @@ export const searchProductByName = async(req, res)=>{
 
 export const bestSellersProducts = async(req, res)=>{
     try{
-        let products = await Product.find().sort({sales: -1})
+        let products = await Product.find({state: true}).sort({sales: -1})
         if(!products) return res.status(404).send({message: 'There are not products'})
         return res.send({message: products})
     }catch(err){
@@ -110,10 +108,9 @@ export const bestSellersProducts = async(req, res)=>{
 export const viewByCategorie = async(req,res)=>{
     try {
         let { id } = req.params
-        let product = await Product.find({categorie: id}, {state: true})
-        if(!product || product.state == false) return res.status(404).send({message: 'Products not found'})
-        let foundedProduct = await Product.find({_id: product._id}).populate('categorie',['categorie','description'])
-        return res.send({message:'Product',foundedProduct})
+        let foundedProduct = await Product.find({categorie: id, state: true}).populate('categorie',['categorie','description'])
+        if(!foundedProduct) return res.status(404).send({message: 'Products not found'})
+        return res.send({foundedProduct})
      } catch (err) {
         console.error(err)
         return res.status(500).send({message:'Error searching products by categorie'})
