@@ -84,10 +84,10 @@ export const deleteProduct = async(req, res)=>{
 
 export const searchProductByName = async(req, res)=>{
     try{
-        let data = req.body
-        let foundedProduct = await Product.findOne({name: data.name, state: true})
+        let { name } = req.body
+        let foundedProduct = await Product.find({name: new RegExp(name, 'i'), state: true})
         if(!foundedProduct) return res.status(404).send({message: 'Product not found'})
-        return res.send({message: `Product ${foundedProduct.name}, price ${foundedProduct.price}, existences ${foundedProduct.existences}`})
+        return res.send({message: foundedProduct}) //`Product ${foundedProduct.name}, price ${foundedProduct.price}, existences ${foundedProduct.existences}`
     }catch(err){
         console.error(err)
         return res.status(500).send({message: 'Error searching product'})
