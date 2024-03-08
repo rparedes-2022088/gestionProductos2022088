@@ -48,15 +48,15 @@ export const newSale = async(req, res)=>{
         for(const factu of fact){
             doc.moveDown()
             doc.fontSize(11).text(`Product: ${factu.name}`)
-            doc.fontSize(11).text(`Price per unit: ${factu.price}`)
+            doc.fontSize(11).text(`Price per unit: Q.${factu.price}`)
             doc.fontSize(11).text(`Amount: ${factu.amount}`)
-            doc.fontSize(11).text(`Subtotal: ${factu.subtotal}`)
+            doc.fontSize(11).text(`Subtotal: Q.${factu.subtotal}`)
             doc.moveDown()
             doc.fontSize(11).text('__________________________________________')
         }
 
         doc.moveDown()
-        doc.fontSize(12).text(`Total: ${data.total}`)
+        doc.fontSize(12).text(`Total: Q.${data.total}`)
 
         doc.end()
         let udpatedCarts = await Cart.updateMany({user: req.user._id, state: true}, {$set: {state: false}})
