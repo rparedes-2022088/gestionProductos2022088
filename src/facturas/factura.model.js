@@ -13,7 +13,7 @@ const facturaSchema = Schema({
     },
     fecha: {
         type: Date,
-        default: Date.now
+        default: Date.now()
     },
     products: [{
         cart: {

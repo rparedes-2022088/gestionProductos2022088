@@ -17,6 +17,8 @@ export const newSale = async(req, res)=>{
         let fact = []
         let total = 0
 
+        
+
         let foundedCarts = await Cart.find({user: req.user._id, state: true})
         if(foundedCarts.length === 0) return res.send({message: 'El usuario no ha agregado nada aun al carrito'})
         for(const cart of foundedCarts){
@@ -34,15 +36,20 @@ export const newSale = async(req, res)=>{
         
         data.products = productos.map(cartId => ({ cart: cartId }))
         data.total = total
-
         const filePath = `PurchaseReceipt${user.username}${data.total}.pdf`
+        let factura = new Factura(data)
+        let fecha = factura.fecha
+        const dateString = fecha.toString();
+        const modifiedDate = dateString.slice(4, 25);
+        console.log(modifiedDate)
+        await factura.save()
         const doc = new PDFDocument()
         doc.pipe(fs.createWriteStream(filePath))
         doc.image('fondo.jpg',0,0, {widht: doc.page.width, height: doc.page.height})
         doc.moveDown()
         doc.fontSize(13).text(`User: ${user.username}`)
         doc.moveDown()
-        doc.fontSize(11).text(`Date: ${Date.now()}`)
+        doc.fontSize(11).text(`Date: ${modifiedDate}`)
         doc.moveDown()
         doc.fontSize(11).text('__________________________________________')
         for(const factu of fact){
@@ -60,8 +67,7 @@ export const newSale = async(req, res)=>{
 
         doc.end()
         let udpatedCarts = await Cart.updateMany({user: req.user._id, state: true}, {$set: {state: false}})
-        let factura = new Factura(data)
-        await factura.save()
+         
         return res.send({message: 'Sale created succesfully', factura})
     }catch(err){
         console.error(err)
