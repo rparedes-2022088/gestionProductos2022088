@@ -27,22 +27,18 @@ export const newSale = async(req, res)=>{
             let sale = productStock.sales + cart.amount
             let stockChange = await Product.findOneAndUpdate({_id: cart.product},{existences: stock, sales: sale})
             //console.log(cart)
-            fact.push({name: productStock.name, price: productStock.price, amount: cart.amount})
+            fact.push({name: productStock.name, price: productStock.price, amount: cart.amount, subtotal: cart.subtotal})
             productos.push(cart._id)
             total += +cart.subtotal
         }
-        let udpatedCarts = await Cart.updateMany({user: req.user._id, state: true}, {$set: {state: false}})
+        
         data.products = productos.map(cartId => ({ cart: cartId }))
         data.total = total
 
         const filePath = `PurchaseReceipt${user.username}${data.total}.pdf`
         const doc = new PDFDocument()
         doc.pipe(fs.createWriteStream(filePath))
-        /*doc.image('E:/Taller 2024/gestionProductosSoloPDFFalta/gestionProductos2022088/src/images/fondo.jpg', {
-            fit: [doc.page.width, doc.page.height],
-            align: 'center',
-            valign: 'center'
-        })*/
+        doc.image('fondo.jpg',0,0, {widht: doc.page.width, height: doc.page.height})
         doc.moveDown()
         doc.fontSize(13).text(`User: ${user.username}`)
         doc.moveDown()
@@ -54,6 +50,7 @@ export const newSale = async(req, res)=>{
             doc.fontSize(11).text(`Product: ${factu.name}`)
             doc.fontSize(11).text(`Price per unit: ${factu.price}`)
             doc.fontSize(11).text(`Amount: ${factu.amount}`)
+            doc.fontSize(11).text(`Subtotal: ${factu.subtotal}`)
             doc.moveDown()
             doc.fontSize(11).text('__________________________________________')
         }
@@ -62,7 +59,7 @@ export const newSale = async(req, res)=>{
         doc.fontSize(12).text(`Total: ${data.total}`)
 
         doc.end()
-
+        let udpatedCarts = await Cart.updateMany({user: req.user._id, state: true}, {$set: {state: false}})
         let factura = new Factura(data)
         await factura.save()
         return res.send({message: 'Sale created succesfully', factura})
